@@ -1,4 +1,10 @@
 package com.example.pikatech.data
 
-class Repositorio {
+import android.content.Context
+import com.example.pikatech.data.network.RetrofitHelper
+
+class Repositorio(val context: Context) {
+
+    private val retrofit = RetrofitHelper.getRetrofit()
+    suspend fun getItems() = retrofit.MostrarItems()
 }
