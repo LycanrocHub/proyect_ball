@@ -6,48 +6,51 @@ import com.example.pikatech.databinding.VistaCeldaBinding
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.example.pikatech.data.models.ItemsModels.itemsData
+import com.example.pikatech.data.models.bayas2.ResultX
 
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
-//class CeldaAdapter( val viewModel: MyViewModel ) : RecyclerView.Adapter<CeldaAdapter.VistaCelda>() {
-//
-//    private var personajeLista = ArrayList<ResultBayas?>()
-//    inner class VistaCelda(val binding: VistaCeldaBinding) : RecyclerView.ViewHolder(binding.root)
-//
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VistaCelda {
-//        val inflater = LayoutInflater.from(parent.context)
-//        val binding = VistaCeldaBinding.inflate(inflater, parent, false)
-//        val celda = VistaCelda(binding)
-//        return celda
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return personajeLista.size
-//    }
-//
-//    override fun onBindViewHolder(holder: VistaCelda, position: Int) {
-//        var personaje = personajeLista[position]
-//
-//
-//        with (holder.binding) {
-//
-//
-//
-//        }
-//    }
-//
-//
-//    fun llenarLista(lista: List<ResultBayas?>) {
-//        personajeLista.clear()
-//        personajeLista.addAll(lista)
-//        notifyDataSetChanged()
-//    }
-//
-//
-//}
+class CeldaAdapter(private val viewModel: MyViewModel, private val lifeCycle: LifecycleOwner) :
+    RecyclerView.Adapter<CeldaAdapter.VistaCelda>() {
+
+    private val listado_de_Bayas = ArrayList<ResultX>()
+    private val listado_de_bayas_copia = ArrayList<ResultX>()
+
+    inner class VistaCelda(val binding: VistaCeldaBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VistaCelda {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = VistaCeldaBinding.inflate(inflater, parent, false)
+        return VistaCelda(binding)
+    }
+
+    override fun getItemCount(): Int {
+        return listado_de_Bayas.size
+    }
+
+    fun updateList(lista: List<ResultX>) {
+        listado_de_Bayas.clear()
+        listado_de_Bayas.addAll(lista)
+        // Copia
+        listado_de_bayas_copia.clear()
+        listado_de_bayas_copia.addAll(lista)
+        notifyDataSetChanged()
+    }
+
+    override fun onBindViewHolder(holder: VistaCelda, position: Int) {
+        val dataItem = listado_de_Bayas[position]
+
+        dataItem.url?.let { url ->
+            viewModel.getBayaIndividual(url).observe(lifeCycle) { item ->
+                if (item != null) {
+                    holder.binding.nombreBaya.text = item.id.toString()
+                    holder.binding.tipoBaya.text = item.name.toString()
+                }
+            }
+        }
+    }
+}
+

@@ -7,4 +7,7 @@ class Repositorio(val context: Context) {
 
     private val retrofit = RetrofitHelper.getRetrofit()
     suspend fun getItems() = retrofit.MostrarItems()
+    suspend fun getBayas() = retrofit.MostrarBayas()
+    suspend fun getBayaIndividual(url: String)= retrofit.ObtenerBaya(url)
+
 }

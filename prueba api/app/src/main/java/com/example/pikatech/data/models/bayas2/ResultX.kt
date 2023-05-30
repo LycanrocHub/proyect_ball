@@ -1,4 +1,4 @@
-package com.example.pikatech.data.models
+package com.example.pikatech.data.models.bayas2
 
 
 import com.squareup.moshi.Json
