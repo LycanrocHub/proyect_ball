@@ -35,12 +35,33 @@ class PokemonFragment : Fragment() {
 
         binding.recyclerview.layoutManager = GridLayoutManager(requireContext(),3, RecyclerView.VERTICAL, false)
 
-        val itemsAdapter = PokemonAdapter(myViewModel, viewLifecycleOwner)
-        binding.recyclerview.adapter = itemsAdapter
+        val pokeAdapter = PokemonAdapter(myViewModel, viewLifecycleOwner)
+        binding.recyclerview.adapter = pokeAdapter
+
+        binding.searchview.setOnQueryTextListener(object :
+
+            android.widget.SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                pokeAdapter.filter.filter(query)
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                pokeAdapter.filter.filter(newText)
+
+                return true
+
+            }
+
+        })
 
         myViewModel.listado_pokemon.observe(viewLifecycleOwner) {
             if (it != null)
-                it.results?.let { it1 -> itemsAdapter.updateList(it1) }
+                it.results?.let { it1 -> pokeAdapter.updateList(it1) }
         }
         myViewModel.getPokemon()
     }
