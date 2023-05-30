@@ -14,7 +14,7 @@ import com.example.pikatech.R
 import com.example.pikatech.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
+//hola
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
