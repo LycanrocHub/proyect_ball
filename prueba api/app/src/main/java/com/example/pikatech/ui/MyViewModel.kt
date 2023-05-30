@@ -21,8 +21,6 @@ class MyViewModel (val context: Context) : ViewModel() {
 
     val listado_pokemon = MutableLiveData<ListadoPokemon?>()
 
-   // val listado_localizaciones = MutableLiveData<Locations?>()
-
     fun getItemsIndividual(url: String): MutableLiveData<itemsData?> {
         val itemIndividual = MutableLiveData<itemsData?>()
         CoroutineScope(Dispatchers.IO).launch {
