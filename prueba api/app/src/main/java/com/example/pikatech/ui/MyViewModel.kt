@@ -6,16 +6,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.pikatech.data.Repositorio
 import com.example.pikatech.data.models.ItemsModels.itemsData
+<<<<<<< HEAD
 import com.example.pikatech.data.models.ItemsModels2.items
 import com.example.pikatech.data.models.LocationsModels.locationData
 import com.example.pikatech.data.models.LocationsModels2.Locations
+=======
+import com.example.pikatech.data.models.bayas.ResultBayas
+import com.example.pikatech.data.models.bayas2.BayaRes
+>>>>>>> 05dc43fac693782fc2affcf504f25dbd987070f2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MyViewModel (val context: Context) : ViewModel() {
+class MyViewModel(val context: Context) : ViewModel() {
     private val repositorio = Repositorio(context)
 
+<<<<<<< HEAD
     val listado_items = MutableLiveData<items?>()
 
      val listado_localizaciones = MutableLiveData<Locations?>()
@@ -31,17 +37,23 @@ class MyViewModel (val context: Context) : ViewModel() {
         }
         return itemIndividual
     }
+=======
+    val listado_bayas = MutableLiveData<BayaRes?>()
+>>>>>>> 05dc43fac693782fc2affcf504f25dbd987070f2
 
-    fun getItems() {
+    fun getBayaIndividual(url: String): MutableLiveData<ResultBayas?> {
+        val itemIndividual = MutableLiveData<ResultBayas?>()
         CoroutineScope(Dispatchers.IO).launch {
-            val response = repositorio.getItems()
+            val response = repositorio.getBayaIndividual(url)
             if (response.isSuccessful) {
-                val respuesta_items = response.body()
-                listado_items.postValue(respuesta_items)
+                val respuesta_baya_ind = response.body()
+                itemIndividual.postValue(respuesta_baya_ind)
             }
         }
+        return itemIndividual
     }
 
+<<<<<<< HEAD
 
     fun getLocations() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -69,6 +81,21 @@ class MyViewModel (val context: Context) : ViewModel() {
     class MyViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return modelClass.getConstructor(Context::class.java).newInstance(context)
+=======
+    fun getItems() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repositorio.getBayas()
+            if (response.isSuccessful) {
+                val respuesta_baya = response.body()
+                listado_bayas.postValue(respuesta_baya)
+>>>>>>> 05dc43fac693782fc2affcf504f25dbd987070f2
             }
         }
+    }
+
+    class MyViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return modelClass.getConstructor(Context::class.java).newInstance(context)
+        }
+    }
 }
