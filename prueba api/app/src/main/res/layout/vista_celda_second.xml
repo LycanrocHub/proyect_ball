@@ -22,19 +22,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
         android:fontFamily="sans-serif-black"
         android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageItem2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nameItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idItem2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/costItem2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="60dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/idItem2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/nameItem"
+        app:layout_constraintStart_toStartOf="@+id/nameItem"
+        app:layout_constraintTop_toBottomOf="@+id/nameItem" />
+
+    <ImageView
+        android:id="@+id/pokemoneda"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/costItem2"
+        app:layout_constraintTop_toBottomOf="@+id/idItem2"
+        app:layout_goneMarginLeft="15dp"
+        app:srcCompat="@drawable/pokemoneda" />
 </androidx.constraintlayout.widget.ConstraintLayout>
