@@ -2,14 +2,12 @@ package com.example.pikatech.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pikatech.data.models.ItemsModels.itemsData
 import com.example.pikatech.data.models.ItemsModels2.ResultX
-import com.example.pikatech.databinding.VistaCeldaBinding
-import com.example.pikatech.databinding.VistaCeldaSecondBinding
+import com.example.pikatech.databinding.VistaCeldaItemsBinding
+
 
 class AdapterItems(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwner) : RecyclerView.Adapter<AdapterItems.CeldaItems>() {
 
@@ -17,12 +15,12 @@ class AdapterItems(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwner)
     private var listado_de_items_copia = ArrayList<ResultX>()
 
 
-    inner class CeldaItems(val binding: VistaCeldaSecondBinding) :
+    inner class CeldaItems(val binding: VistaCeldaItemsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CeldaItems {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = VistaCeldaSecondBinding.inflate(layoutInflater, parent, false)
+        val binding = VistaCeldaItemsBinding.inflate(layoutInflater, parent, false)
         return CeldaItems(binding)
     }
 
@@ -58,8 +56,6 @@ class AdapterItems(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwner)
                 }
             }
         } }
-
-
 
     }
 

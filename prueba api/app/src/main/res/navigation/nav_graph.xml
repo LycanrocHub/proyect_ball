@@ -15,4 +15,9 @@
         android:name="com.example.pikatech.ui.ItemsFragment"
         android:label="fragment_items"
         tools:layout="@layout/fragment_items" />
+    <fragment
+        android:id="@+id/fragmentLocations"
+        android:name="com.example.pikatech.FragmentLocations"
+        android:label="fragment_locations"
+        tools:layout="@layout/fragment_locations" />
 </navigation>

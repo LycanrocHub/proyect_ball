@@ -9,4 +9,7 @@ class Repositorio(val context: Context) {
 
     suspend fun getItems() = retrofit.MostrarItems()
     suspend fun getItemIndividual(url: String)= retrofit.ObtenerItem(url)
+
+    suspend fun getLocations() = retrofit.MostrarLocalizaciones()
+    suspend fun getLocationIndividual(url: String)= retrofit.ObtenerLocalizaciones(url)
 }
