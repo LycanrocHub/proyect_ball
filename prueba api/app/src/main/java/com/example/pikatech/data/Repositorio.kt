@@ -9,4 +9,6 @@ class Repositorio(val context: Context) {
 
     suspend fun getItems() = retrofit.MostrarItems()
     suspend fun getItemIndividual(url: String)= retrofit.ObtenerItem(url)
+    suspend fun getPokemon(offset: Int, limit: Int) = retrofit.MostrarPokemon(offset, limit)
+    suspend fun getPokemonIndividual(url: String) = retrofit.ObtenerPokemon(url)
 }

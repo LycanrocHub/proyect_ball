@@ -14,12 +14,12 @@ import com.example.pikatech.R
 import com.example.pikatech.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-//hola
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)

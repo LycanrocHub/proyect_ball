@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.pikatech.data.Repositorio
 import com.example.pikatech.data.models.ItemsModels.itemsData
 import com.example.pikatech.data.models.ItemsModels2.items
+import com.example.pikatech.data.models.pokemon.ListadoPokemon
+import com.example.pikatech.data.models.pokemon.Result
+import com.example.pikatech.data.models.pokemon.detallepoke.RespuestaPokemon
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,6 +18,8 @@ class MyViewModel (val context: Context) : ViewModel() {
     private val repositorio = Repositorio(context)
 
     val listado_items = MutableLiveData<items?>()
+
+    val listado_pokemon = MutableLiveData<ListadoPokemon?>()
 
    // val listado_localizaciones = MutableLiveData<Locations?>()
 
@@ -38,6 +43,46 @@ class MyViewModel (val context: Context) : ViewModel() {
                 listado_items.postValue(respuesta_items)
             }
         }
+    }
+
+    fun getPokemon(){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val response = repositorio.getPokemon(0, 1010)
+
+            if(response.isSuccessful){
+
+                val respuesta_pokemon = response.body()
+
+                listado_pokemon.postValue(respuesta_pokemon)
+
+            }
+
+        }
+
+    }
+
+    fun getPokemonIndividual(url: String): MutableLiveData<RespuestaPokemon?>{
+
+        val pokemonIndividual = MutableLiveData<RespuestaPokemon?>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val response = repositorio.getPokemonIndividual(url)
+
+            if(response.isSuccessful){
+
+                val respuesta_pokemon_ind = response.body()
+
+                pokemonIndividual.postValue(respuesta_pokemon_ind)
+
+            }
+
+        }
+
+        return pokemonIndividual
+
     }
 
         class MyViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
