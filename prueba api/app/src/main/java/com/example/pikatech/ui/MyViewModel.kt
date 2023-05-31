@@ -61,6 +61,15 @@ class MyViewModel(val context: Context) : ViewModel() {
         }
     }
 
+    fun getBayas() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repositorio.getBayas()
+            if (response.isSuccessful) {
+                val respuesta_baya = response.body()
+                listado_bayas.postValue(respuesta_baya)
+            }
+        }
+    }
     fun getLocationIndividual(url: String): MutableLiveData<locationData?> {
         val LocationIndividual = MutableLiveData<locationData?>()
         CoroutineScope(Dispatchers.IO).launch {
@@ -76,10 +85,10 @@ class MyViewModel(val context: Context) : ViewModel() {
 
     fun getItems() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = repositorio.getBayas()
+            val response = repositorio.getItems()
             if (response.isSuccessful) {
-                val respuesta_baya = response.body()
-                listado_bayas.postValue(respuesta_baya)
+                val respuesta_items = response.body()
+                listado_items.postValue(respuesta_items)
             }
         }
     }

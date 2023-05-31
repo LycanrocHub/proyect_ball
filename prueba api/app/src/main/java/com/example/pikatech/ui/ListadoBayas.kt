@@ -38,7 +38,7 @@ class ListadoBayas : Fragment() {
             bayas?.results?.let { celdaAdapter.updateList(it) }
         }
 
-        myViewModel.getItems()
+        myViewModel.getBayas()
     }
 
     override fun onDestroyView() {
