@@ -29,7 +29,8 @@ class MyViewModel(val context: Context) : ViewModel() {
         return itemIndividual
     }
 
-    fun getItems() {
+
+    fun getBayas() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = repositorio.getBayas()
             if (response.isSuccessful) {
