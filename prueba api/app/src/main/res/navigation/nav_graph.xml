@@ -3,29 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/listadoBayas">
+    app:startDestination="@id/itemsFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.pikatech.ui.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-        <action
-            android:id="@+id/action_FirstFragment_to_listadoBayas"
-            app:destination="@id/listadoBayas" />
-    </fragment>
+        tools:layout="@layout/fragment_first"/>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.pikatech.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        android:id="@+id/itemsFragment"
+        android:name="com.example.pikatech.ui.ItemsFragment"
+        android:label="fragment_items"
+        tools:layout="@layout/fragment_items" />
     <fragment
-        android:id="@+id/listadoBayas"
-        android:name="com.example.pikatech.ui.ListadoBayas"
-        android:label="ListadoBayas" />
+        android:id="@+id/pokemonFragment"
+        android:name="com.example.pikatech.ui.PokemonFragment"
+        android:label="fragment_pokemon"
+        tools:layout="@layout/fragment_pokemon" />
+    <fragment
+        android:id="@+id/fragmentLocations"
+        android:name="com.example.pikatech.FragmentLocations"
+        android:label="fragment_locations"
+        tools:layout="@layout/fragment_locations" />
 </navigation>
