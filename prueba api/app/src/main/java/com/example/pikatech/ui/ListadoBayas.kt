@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pikatech.databinding.FragmentListadoBayasBinding
-import com.example.pikatech.databinding.FragmentSecondBinding
 
 
 class ListadoBayas : Fragment() {
