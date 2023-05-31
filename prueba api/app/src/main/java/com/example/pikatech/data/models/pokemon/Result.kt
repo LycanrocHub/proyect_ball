@@ -7,5 +7,6 @@ data class Result(
     @field:Json(name = "name")
     val name: String?,
     @field:Json(name = "url")
-    val url: String?
+    val url: String?,
+    var id: Int
 )

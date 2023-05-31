@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pikatech.data.models.pokemon.Result
 import com.example.pikatech.databinding.VistaCeldaPokemonBinding
+import com.squareup.picasso.Picasso
 
 class PokemonAdapter(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwner) : RecyclerView.Adapter<PokemonAdapter.CeldaPokemon>(),
     Filterable {
@@ -28,21 +29,13 @@ class PokemonAdapter(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwne
 
     override fun onBindViewHolder(holder: PokemonAdapter.CeldaPokemon, position: Int) {
         val dataItem = listado_de_pokemon.get(position)
+
         holder.binding.pokemonNombre.text = dataItem.name
 
-        dataItem.url?.let { myViewModel.getPokemonIndividual(it).observe(lifeCycle){
-            if (it != null) {
+        val urlImagen = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dataItem.id}.png"
 
-                with(holder.binding) {
-                    Glide.with(
-                        holder
-                            .itemView.context
-                    )
-                        .load(it.sprites?.frontDefault)
-                        .into(holder.binding.pokemonFoto)
-                }
-            }
-        } }
+        Picasso.get().load(urlImagen).into(holder.binding.pokemonFoto);
+
     }
 
     override fun getItemCount(): Int {

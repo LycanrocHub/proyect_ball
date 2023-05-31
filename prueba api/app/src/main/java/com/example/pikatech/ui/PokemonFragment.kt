@@ -60,8 +60,18 @@ class PokemonFragment : Fragment() {
         })
 
         myViewModel.listado_pokemon.observe(viewLifecycleOwner) {
-            if (it != null)
+            if (it != null){
+                it.results?.forEachIndexed { index, result ->
+
+                    result.id = index + 1
+
+                }
+
+
                 it.results?.let { it1 -> pokeAdapter.updateList(it1) }
+
+            }
+
         }
         myViewModel.getPokemon()
     }
