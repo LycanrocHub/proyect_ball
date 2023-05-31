@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/pokemonFragment">
+    app:startDestination="@id/itemsFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -20,4 +20,9 @@
         android:name="com.example.pikatech.ui.PokemonFragment"
         android:label="fragment_pokemon"
         tools:layout="@layout/fragment_pokemon" />
+    <fragment
+        android:id="@+id/fragmentLocations"
+        android:name="com.example.pikatech.FragmentLocations"
+        android:label="fragment_locations"
+        tools:layout="@layout/fragment_locations" />
 </navigation>

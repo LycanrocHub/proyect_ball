@@ -2,6 +2,10 @@ package com.example.pikatech.data.network
 
 import com.example.pikatech.data.models.ItemsModels.itemsData
 import com.example.pikatech.data.models.ItemsModels2.items
+import com.example.pikatech.data.models.LocationsModels.locationData
+import com.example.pikatech.data.models.LocationsModels2.Locations
+import com.example.pikatech.data.models.bayas.ResultBayas
+import com.example.pikatech.data.models.bayas2.BayaRes
 import com.example.pikatech.data.models.pokemon.ListadoPokemon
 import com.example.pikatech.data.models.pokemon.detallepoke.RespuestaPokemon
 import retrofit2.Response
@@ -24,5 +28,17 @@ interface ApiService {
     @GET()
     suspend fun ObtenerPokemon(@Url url: String): Response<RespuestaPokemon>
 
+
+    //conseguir listado de localizaciones
+    @GET("location")
+    suspend fun MostrarLocalizaciones(): Response<Locations>
+
+    @GET()
+    suspend fun ObtenerLocalizaciones(@Url url: String): Response<locationData>
+    @GET("berry")
+    suspend fun MostrarBayas(): Response<BayaRes>
+
+    @GET()
+    suspend fun ObtenerBaya(@Url url: String): Response<ResultBayas>
 
 }
