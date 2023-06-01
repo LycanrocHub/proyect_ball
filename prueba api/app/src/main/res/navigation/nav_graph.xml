@@ -25,4 +25,9 @@
         android:name="com.example.pikatech.FragmentLocations"
         android:label="fragment_locations"
         tools:layout="@layout/fragment_locations" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.pikatech.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
