@@ -3,13 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/itemsFragment">
+    app:startDestination="@id/PrimerFragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.pikatech.ui.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first"/>
     <fragment
         android:id="@+id/itemsFragment"
         android:name="com.example.pikatech.ui.ItemsFragment"
@@ -30,4 +25,8 @@
         android:name="com.example.pikatech.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/PrimerFragment"
+        android:name="com.example.pikatech.ui.PrimerFragment"
+        android:label="Inventario" />
 </navigation>
