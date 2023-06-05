@@ -1,4 +1,4 @@
-package com.example.pikatech.ui
+package com.example.pikatech.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pikatech.databinding.FragmentItemsBinding
+import com.example.pikatech.ui.AdapterItems
+import com.example.pikatech.ui.MyViewModel
 
 
 class ItemsFragment : Fragment() {
