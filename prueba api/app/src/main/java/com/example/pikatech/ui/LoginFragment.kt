@@ -29,7 +29,6 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
 
-
     }
 
 }
