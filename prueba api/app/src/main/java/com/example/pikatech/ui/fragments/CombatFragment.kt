@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.pikatech.R
+import com.example.pikatech.data.models.pokemon.detallemovimiento.RespuestaMovimiento
 import com.example.pikatech.data.models.pokemon.detallepoke.Move
 import com.example.pikatech.data.models.pokemon.detallepoke.RespuestaPokemon
 import com.example.pikatech.databinding.FragmentCombatBinding
@@ -19,7 +20,7 @@ import java.util.ArrayList
 class CombatFragment : Fragment() {
 
     private var listado_pokemon_individual = ArrayList<RespuestaPokemon>()
-    private var listado_movimientos = ArrayList<Move>()
+    private var listado_movimientos = ArrayList<RespuestaMovimiento>()
 
     private val myViewModel by activityViewModels<MyViewModel> {
         MyViewModel.MyViewModelFactory(requireContext())
