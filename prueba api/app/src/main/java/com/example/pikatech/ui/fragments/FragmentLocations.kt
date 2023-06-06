@@ -1,4 +1,4 @@
-package com.example.pikatech.ui
+package com.example.pikatech.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.pikatech.databinding.FragmentItemsBinding
+import com.example.pikatech.databinding.FragmentLocationsBinding
+import com.example.pikatech.ui.AdapterLocations
+import com.example.pikatech.ui.MyViewModel
 
+class FragmentLocations : Fragment() {
 
-class ItemsFragment : Fragment() {
-
-    private var _binding: FragmentItemsBinding? = null
+    private var _binding: FragmentLocationsBinding? = null
     private val binding get() = _binding!!
 
     private val myViewModel by activityViewModels<MyViewModel> {
@@ -20,12 +21,13 @@ class ItemsFragment : Fragment() {
 
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentItemsBinding.inflate(inflater, container, false)
+        _binding = FragmentLocationsBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -33,23 +35,21 @@ class ItemsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recycler.layoutManager = LinearLayoutManager(context)
+        binding.recyclerLocal.layoutManager = LinearLayoutManager(context)
 
-        val itemsAdapter = AdapterItems(myViewModel, viewLifecycleOwner)
-        binding.recycler.adapter = itemsAdapter
+        val locationsAdapter = AdapterLocations(myViewModel, viewLifecycleOwner)
+        binding.recyclerLocal.adapter = locationsAdapter
 
-        myViewModel.listado_items.observe(viewLifecycleOwner) {
+        myViewModel.listado_localizaciones.observe(viewLifecycleOwner) {
             if (it != null)
-                it.results?.let { it1 -> itemsAdapter.updateList(it1) }
+                it.results?.let { it1 -> locationsAdapter.updateList(it1) }
         }
-
-        myViewModel.getItems()
-
-
+        myViewModel.getLocations()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }
