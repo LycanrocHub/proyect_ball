@@ -5,6 +5,8 @@ import com.example.pikatech.databinding.VistaCeldaBinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
@@ -13,9 +15,9 @@ import com.example.pikatech.data.models.bayas2.ResultX
 
 
 class CeldaAdapter(private val viewModel: MyViewModel, private val lifeCycle: LifecycleOwner) :
-    RecyclerView.Adapter<CeldaAdapter.VistaCelda>() {
+    RecyclerView.Adapter<CeldaAdapter.VistaCelda>(), Filterable {
 
-    private val listado_de_Bayas = ArrayList<ResultX>()
+    private var listado_de_Bayas = ArrayList<ResultX>()
     private val listado_de_bayas_copia = ArrayList<ResultX>()
 
     inner class VistaCelda(val binding: VistaCeldaBinding) :
@@ -52,5 +54,33 @@ class CeldaAdapter(private val viewModel: MyViewModel, private val lifeCycle: Li
             }
         }
     }
-}
 
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val busqueda = constraint.toString()
+
+
+                val filteredList = if (busqueda.isEmpty()) {
+                    listado_de_bayas_copia
+                } else {
+                    listado_de_bayas_copia.filter {
+                        it.name?.lowercase()?.contains(busqueda) ?: false || //minus
+                                it.name?.uppercase()?.contains(busqueda) ?: false //mayus
+
+                    }
+                }
+                val filterResult = FilterResults()
+                filterResult.values = filteredList
+                return filterResult
+            }
+
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                listado_de_Bayas = results?.values as ArrayList<ResultX>
+                notifyDataSetChanged()
+            }
+        }
+    }
+}

@@ -1,10 +1,10 @@
 package com.example.pikatech.ui
 
-import android.app.Activity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.pikatech.FragmentLocations
-import com.example.pikatech.MainActivity
+import com.example.pikatech.ui.fragments.FragmentLocations
+import com.example.pikatech.ui.fragments.PokemonFragment
+import com.example.pikatech.ui.fragments.PrimerFragment
 
 
 class ViewPagerAdapter(activity: PrimerFragment) : FragmentStateAdapter(activity) {
