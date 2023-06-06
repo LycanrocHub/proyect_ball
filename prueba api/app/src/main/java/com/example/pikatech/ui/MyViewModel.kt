@@ -22,9 +22,8 @@ class MyViewModel(val context: Context) : ViewModel() {
 
 
     val listado_items = MutableLiveData<items?>()
-
     val listado_pokemon = MutableLiveData<ListadoPokemon?>()
-     val listado_localizaciones = MutableLiveData<Locations?>()
+    val listado_localizaciones = MutableLiveData<Locations?>()
 
     fun getItemsIndividual(url: String): MutableLiveData<itemsData?> {
         val itemIndividual = MutableLiveData<itemsData?>()
@@ -116,23 +115,14 @@ class MyViewModel(val context: Context) : ViewModel() {
     fun getPokemonIndividual(url: String): MutableLiveData<RespuestaPokemon?>{
 
         val pokemonIndividual = MutableLiveData<RespuestaPokemon?>()
-
         CoroutineScope(Dispatchers.IO).launch {
-
             val response = repositorio.getPokemonIndividual(url)
-
             if(response.isSuccessful){
-
                 val respuesta_pokemon_ind = response.body()
-
                 pokemonIndividual.postValue(respuesta_pokemon_ind)
-
             }
-
         }
-
         return pokemonIndividual
-
     }
 
 
