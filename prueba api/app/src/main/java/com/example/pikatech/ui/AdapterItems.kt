@@ -2,6 +2,7 @@ package com.example.pikatech.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -58,5 +59,7 @@ class AdapterItems(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwner)
         } }
 
     }
+
+
 
 }
