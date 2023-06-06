@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/combate"
+        android:icon="@drawable/fight_button"
+        android:title="Combate" />
+    <item
+        android:id="@+id/PrimerFragment"
+        android:title="Información" />
+</menu>

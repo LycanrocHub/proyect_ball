@@ -39,6 +39,22 @@ class ListadoBayas : Fragment() {
         }
 
         myViewModel.getBayas()
+        binding.searchView3.setOnQueryTextListener(object :
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                celdaAdapter.filter.filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                celdaAdapter.filter.filter(newText)
+
+                return true
+
+            }
+
+        })
     }
 
     override fun onDestroyView() {

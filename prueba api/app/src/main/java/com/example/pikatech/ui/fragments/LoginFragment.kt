@@ -1,5 +1,6 @@
 package com.example.pikatech.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.core.view.isInvisible
+import com.example.pikatech.MainActivity
 import com.example.pikatech.R
 import com.example.pikatech.databinding.FragmentLoginBinding
 
@@ -59,11 +61,13 @@ class LoginFragment : Fragment() {
             val userName = binding.textInputEditTextUserName.text.toString()
             val userPassword = binding.textInputEditTextUserPassword.text.toString()
             if (userName.isNotEmpty() && userPassword.isNotEmpty()) {
-                val nuevoFragment = PrimerFragment()
-                val fragmentManager = parentFragmentManager.beginTransaction()
-                fragmentManager
-                    .replace(R.id.containerview, nuevoFragment)
-                    .commit()
+//                val nuevoFragment = PrimerFragment()
+//                val fragmentManager = parentFragmentManager.beginTransaction()
+//                fragmentManager
+//                    .replace(R.id.containerview, nuevoFragment)
+//                    .commit()
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                requireActivity().finish()
             } else {
                 Toast.makeText(requireContext(), "Faltan campos que rellenar. Vuelva a intentarlo", Toast.LENGTH_SHORT).show()
             }

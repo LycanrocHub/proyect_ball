@@ -45,6 +45,24 @@ class FragmentLocations : Fragment() {
                 it.results?.let { it1 -> locationsAdapter.updateList(it1) }
         }
         myViewModel.getLocations()
+
+
+        binding.searchView2.setOnQueryTextListener(object :
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                locationsAdapter.filter.filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                locationsAdapter.filter.filter(newText)
+
+                return true
+
+            }
+
+        })
     }
 
     override fun onDestroyView() {

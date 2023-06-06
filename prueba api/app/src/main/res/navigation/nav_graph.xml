@@ -29,4 +29,8 @@
         android:id="@+id/PrimerFragment"
         android:name="com.example.pikatech.ui.fragments.PrimerFragment"
         android:label="Inventario" />
+    <fragment
+        android:id="@+id/listadoBayas"
+        android:name="com.example.pikatech.ui.ListadoBayas"
+        android:label="ListadoBayas" />
 </navigation>
