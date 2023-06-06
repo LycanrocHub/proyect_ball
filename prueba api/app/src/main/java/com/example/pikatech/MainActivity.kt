@@ -1,5 +1,6 @@
 package com.example.pikatech
 
+import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.pikatech.R
 import com.example.pikatech.databinding.ActivityMainBinding
+import com.example.pikatech.ui.ViewPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,19 +28,23 @@ class MainActivity : AppCompatActivity() {
         // Comentario de prueba!!
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.toolbar.setTitleTextColor(Color.WHITE)
+
+
+        val navController = findNavController(R.id.containerview)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
-        }
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -57,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navController = findNavController(R.id.containerview)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }

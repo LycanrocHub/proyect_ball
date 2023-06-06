@@ -42,7 +42,10 @@ class ItemsFragment : Fragment() {
             if (it != null)
                 it.results?.let { it1 -> itemsAdapter.updateList(it1) }
         }
+
         myViewModel.getItems()
+
+
     }
 
     override fun onDestroyView() {
