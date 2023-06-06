@@ -17,9 +17,6 @@ class PrimerFragment : Fragment() {
     private var _binding: FragmentPrimerBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

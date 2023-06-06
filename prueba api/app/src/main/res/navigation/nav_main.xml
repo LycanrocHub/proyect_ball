@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/PrimerFragment">
+
+    <fragment
+        android:id="@+id/pokemonFragment"
+        android:name="com.example.pikatech.ui.fragments.PokemonFragment"
+        android:label="fragment_pokemon"
+        tools:layout="@layout/fragment_pokemon" />
+    <fragment
+        android:id="@+id/fragmentLocations"
+        android:name="com.example.pikatech.ui.fragments.FragmentLocations"
+        android:label="fragment_locations"
+        tools:layout="@layout/fragment_locations" />
+    <fragment
+        android:id="@+id/PrimerFragment"
+        android:name="com.example.pikatech.ui.fragments.PrimerFragment"
+        android:label="Inventario" />
+    <fragment
+        android:id="@+id/listadoBayas"
+        android:name="com.example.pikatech.ui.ListadoBayas"
+        android:label="ListadoBayas" />
+    <fragment
+        android:id="@+id/itemsFragment"
+        tools:layout="@layout/fragment_items"
+        android:name="com.example.pikatech.ui.ItemsFragment"
+        android:label="ItemsFragment" />
+    <fragment
+        android:id="@+id/combatFragment"
+        android:name="com.example.pikatech.ui.fragments.CombatFragment"
+        android:label="fragment_combat"
+        tools:layout="@layout/fragment_combat" />
+</navigation>

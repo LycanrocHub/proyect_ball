@@ -35,28 +35,28 @@ class CombatFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val randomNumber1 = 1 .. 1010
-        val randomNumber2 = 1 .. 1010
-        val randomPokemonId1 = randomNumber1.random()
-        val randomPokemonId2 = randomNumber2.random()
-
-        val pokemonInfo1 = listado_pokemon_individual.get(randomPokemonId1)
-        val pokemonInfo2 = listado_pokemon_individual.get(randomPokemonId2)
-
-        val urlImagenPokemon1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId1}.png"
-        Picasso.get().load(urlImagenPokemon1).into(binding.pokemon1)
-        binding.button5.text = pokemonInfo1.abilities?.get(0).toString()
-        binding.button6.text = pokemonInfo1.abilities?.get(1).toString()
-        binding.button7.text = pokemonInfo1.abilities?.get(2).toString()
-        binding.button8.text = pokemonInfo1.abilities?.get(3).toString()
-
-        val urlImagenPokemon2 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId2}.png"
-
-
-        Picasso.get().load(urlImagenPokemon2).into(binding.pokemon2)
-
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        val randomNumber1 = 1 .. 1010
+//        val randomNumber2 = 1 .. 1010
+//        val randomPokemonId1 = randomNumber1.random()
+//        val randomPokemonId2 = randomNumber2.random()
+//
+//        val pokemonInfo1 = listado_pokemon_individual.get(randomPokemonId1)
+//        val pokemonInfo2 = listado_pokemon_individual.get(randomPokemonId2)
+//
+//        val urlImagenPokemon1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId1}.png"
+//        Picasso.get().load(urlImagenPokemon1).into(binding.pokemon1)
+//        binding.button5.text = pokemonInfo1.abilities?.get(0).toString()
+//        binding.button6.text = pokemonInfo1.abilities?.get(1).toString()
+//        binding.button7.text = pokemonInfo1.abilities?.get(2).toString()
+//        binding.button8.text = pokemonInfo1.abilities?.get(3).toString()
+//
+//        val urlImagenPokemon2 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId2}.png"
+//
+//
+//        Picasso.get().load(urlImagenPokemon2).into(binding.pokemon2)
+//
+//    }
 }
