@@ -7,6 +7,7 @@ import com.example.pikatech.data.models.LocationsModels2.Locations
 import com.example.pikatech.data.models.bayas.ResultBayas
 import com.example.pikatech.data.models.bayas2.BayaRes
 import com.example.pikatech.data.models.pokemon.ListadoPokemon
+import com.example.pikatech.data.models.pokemon.detallemovimiento.RespuestaMovimiento
 import com.example.pikatech.data.models.pokemon.detallepoke.RespuestaPokemon
 import retrofit2.Response
 import retrofit2.http.GET
@@ -28,6 +29,8 @@ interface ApiService {
     @GET()
     suspend fun ObtenerPokemon(@Url url: String): Response<RespuestaPokemon>
 
+    @GET()
+    suspend fun ObtenerMovimiento(@Url url: String): Response<RespuestaMovimiento>
 
     //conseguir listado de localizaciones
     @GET("location")

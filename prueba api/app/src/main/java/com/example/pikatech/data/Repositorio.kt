@@ -12,6 +12,8 @@ class Repositorio(val context: Context) {
     suspend fun getPokemon(offset: Int, limit: Int) = retrofit.MostrarPokemon(offset, limit)
     suspend fun getPokemonIndividual(url: String) = retrofit.ObtenerPokemon(url)
 
+    suspend fun getDatosMovimiento(url: String) = retrofit.ObtenerMovimiento(url)
+
     suspend fun getLocations() = retrofit.MostrarLocalizaciones()
     suspend fun getLocationIndividual(url: String)= retrofit.ObtenerLocalizaciones(url)
     suspend fun getBayas() = retrofit.MostrarBayas()
