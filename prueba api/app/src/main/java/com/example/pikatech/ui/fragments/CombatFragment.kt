@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.pikatech.R
+import com.example.pikatech.data.models.pokemon.detallepoke.Move
 import com.example.pikatech.data.models.pokemon.detallepoke.RespuestaPokemon
 import com.example.pikatech.databinding.FragmentCombatBinding
 import com.example.pikatech.databinding.FragmentLoginBinding
@@ -18,6 +19,7 @@ import java.util.ArrayList
 class CombatFragment : Fragment() {
 
     private var listado_pokemon_individual = ArrayList<RespuestaPokemon>()
+    private var listado_movimientos = ArrayList<Move>()
 
     private val myViewModel by activityViewModels<MyViewModel> {
         MyViewModel.MyViewModelFactory(requireContext())
@@ -43,20 +45,41 @@ class CombatFragment : Fragment() {
         val randomPokemonId1 = randomNumber1.random()
         val randomPokemonId2 = randomNumber2.random()
 
-        val pokemonInfo1 = listado_pokemon_individual.get(randomPokemonId1)
-        val pokemonInfo2 = listado_pokemon_individual.get(randomPokemonId2)
+        val pokemonInfo1 = listado_pokemon_individual[randomPokemonId1]
+        val pokemonInfo2 = listado_pokemon_individual[randomPokemonId2]
+        val movimientosPokemon = listado_movimientos[1]
 
         val urlImagenPokemon1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId1}.png"
         Picasso.get().load(urlImagenPokemon1).into(binding.pokemon1)
-        binding.button5.text = pokemonInfo1.abilities?.get(0).toString()
-        binding.button6.text = pokemonInfo1.abilities?.get(1).toString()
-        binding.button7.text = pokemonInfo1.abilities?.get(2).toString()
-        binding.button8.text = pokemonInfo1.abilities?.get(3).toString()
+
+        binding.button5.text = pokemonInfo1.moves?.get(1)?.move?.name
+        binding.button6.text = pokemonInfo1.moves?.get(2)?.move?.name
+        binding.button7.text = pokemonInfo1.moves?.get(3)?.move?.name
+        binding.button8.text = pokemonInfo1.moves?.get(4)?.move?.name
+
+        val movimiento1 = movimientosPokemon.versionGroupDetails?.get(1).mo
 
         val urlImagenPokemon2 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId2}.png"
-
-
         Picasso.get().load(urlImagenPokemon2).into(binding.pokemon2)
 
+        val hpPokemon1 = 100
+        val hpPokemon2 = 100
+
+        binding.progressBar4.progress = 100
+        binding.progressBar3.progress = 100
+
+        if (hpPokemon1 >= 0 && hpPokemon2 >=0) {
+
+            fun atacar() {
+
+            }
+
+        } else if (hpPokemon1 == 0 || hpPokemon2 ==0) {
+
+
+
+        }
+
     }
+
 }
