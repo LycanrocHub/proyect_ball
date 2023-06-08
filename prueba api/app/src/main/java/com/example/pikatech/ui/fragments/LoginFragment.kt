@@ -61,11 +61,6 @@ class LoginFragment : Fragment() {
             val userName = binding.textInputEditTextUserName.text.toString()
             val userPassword = binding.textInputEditTextUserPassword.text.toString()
             if (userName.isNotEmpty() && userPassword.isNotEmpty()) {
-//                val nuevoFragment = PrimerFragment()
-//                val fragmentManager = parentFragmentManager.beginTransaction()
-//                fragmentManager
-//                    .replace(R.id.containerview, nuevoFragment)
-//                    .commit()
                 startActivity(Intent(requireContext(), MainActivity::class.java))
                 requireActivity().finish()
             } else {

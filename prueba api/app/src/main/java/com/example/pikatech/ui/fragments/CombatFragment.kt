@@ -5,30 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.pikatech.R
-import com.example.pikatech.data.models.pokemon.detallemovimiento.RespuestaMovimiento
-import com.example.pikatech.data.models.pokemon.detallepoke.Move
-import com.example.pikatech.data.models.pokemon.detallepoke.RespuestaPokemon
 import com.example.pikatech.databinding.FragmentCombatBinding
-import com.example.pikatech.databinding.FragmentLoginBinding
-import com.example.pikatech.ui.MyViewModel
-import com.example.pikatech.ui.PokemonAdapter
 import com.squareup.picasso.Picasso
-import java.util.ArrayList
+import kotlin.random.Random
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.os.Handler
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
+import android.widget.Toast
 
 class CombatFragment : Fragment() {
 
-    private var listado_pokemon_individual = ArrayList<RespuestaPokemon>()
-    private var listado_movimientos = ArrayList<RespuestaMovimiento>()
-
-    private val myViewModel by activityViewModels<MyViewModel> {
-        MyViewModel.MyViewModelFactory(requireContext())
-
-    }
-
     private var _binding: FragmentCombatBinding? = null
     private val binding get() = _binding!!
+
+    private var saludPokemon1 = 100
+    private var saludPokemon2 = 100
+    private var turnoJugador = true
+    private var ataqueJugador = false
+    private var defensaJugador = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,65 +43,172 @@ class CombatFragment : Fragment() {
         val randomPokemonId1 = randomNumber1.random()
         val randomPokemonId2 = randomNumber2.random()
 
-        val pokemonInfo1 = listado_pokemon_individual[randomPokemonId1]
-        val pokemonInfo2 = listado_pokemon_individual[randomPokemonId2]
-        val movimientosPokemon = listado_movimientos[1]
-
-        val urlImagenPokemon1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId1}.png"
-        Picasso.get().load(urlImagenPokemon1).into(binding.pokemon1)
-
-        binding.button5.text = pokemonInfo1.moves?.get(1)?.move?.name
-        binding.button6.text = pokemonInfo1.moves?.get(2)?.move?.name
-        binding.button7.text = pokemonInfo1.moves?.get(3)?.move?.name
-        binding.button8.text = pokemonInfo1.moves?.get(4)?.move?.name
-
-        val movimiento1 = movimientosPokemon.versionGroupDetails?.get(1).mo
+        val urlImagenPokemon1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${randomPokemonId1}.png"
+        Picasso.get().load(urlImagenPokemon1).error(R.drawable.error).into(binding.pokemon1)
 
         val urlImagenPokemon2 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId2}.png"
         Picasso.get().load(urlImagenPokemon2).into(binding.pokemon2)
 
-        val hpPokemon1 = 100
-        val hpPokemon2 = 100
+        val animacionJugador = TranslateAnimation(-800.0f, 0.0f, 0.0f, 0.0f)
+        animacionJugador.duration = 1000
+        binding.pokemon1.startAnimation(animacionJugador)
 
-        binding.progressBar4.progress = 100
-        binding.progressBar3.progress = 100
+        val animacionIA = TranslateAnimation(1000.0f, 0.0f, 0.0f, 0.0f)
+        animacionIA.duration = 1600
+        binding.pokemon2.startAnimation(animacionIA)
 
-        if (hpPokemon1 >= 0 && hpPokemon2 >=0) {
+        binding.progressBar4.progress = saludPokemon1
+        binding.progressBar3.progress = saludPokemon2
 
-            fun atacar() {
-
+        binding.button5.setOnClickListener {
+            if (turnoJugador && saludPokemon2 > 0) {
+                atacarJugador()
+                ejecutarTurnoIA()
             }
-
-        } else if (hpPokemon1 == 0 || hpPokemon2 ==0) {
-
-
-
         }
 
+        binding.button6.setOnClickListener {
+            if (turnoJugador && saludPokemon1 > 0) {
+                defenderJugador()
+                turnoJugador = false
+                defensaJugador = true
+                ejecutarTurnoIA()
+            }
+        }
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        val randomNumber1 = 1 .. 1010
-//        val randomNumber2 = 1 .. 1010
-//        val randomPokemonId1 = randomNumber1.random()
-//        val randomPokemonId2 = randomNumber2.random()
-//
-//        val pokemonInfo1 = listado_pokemon_individual.get(randomPokemonId1)
-//        val pokemonInfo2 = listado_pokemon_individual.get(randomPokemonId2)
-//
-//        val urlImagenPokemon1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId1}.png"
-//        Picasso.get().load(urlImagenPokemon1).into(binding.pokemon1)
-//        binding.button5.text = pokemonInfo1.abilities?.get(0).toString()
-//        binding.button6.text = pokemonInfo1.abilities?.get(1).toString()
-//        binding.button7.text = pokemonInfo1.abilities?.get(2).toString()
-//        binding.button8.text = pokemonInfo1.abilities?.get(3).toString()
-//
-//        val urlImagenPokemon2 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId2}.png"
-//
-//
-//        Picasso.get().load(urlImagenPokemon2).into(binding.pokemon2)
-//
-//    }
+    private fun ejecutarTurnoIA() {
+        if (!turnoJugador) {
+            val posibilidadAtaqueDefensa = 1..2
+            val posibilidad = posibilidadAtaqueDefensa.random()
+            if (posibilidad == 1) {
+                atacarIA()
+                turnoJugador = true
+            } else if (posibilidad == 2) {
+                defenderIA()
+                turnoJugador = true
+            }
+        }
+    }
+
+    private fun atacarJugador() {
+        if (saludPokemon2 > 0) {
+            animacionesAtaqueJugador()
+            val dañoRecibido = 20
+            saludPokemon2 -= dañoRecibido
+            binding.textView3.text = "$saludPokemon2 HP"
+            binding.progressBar3.progress = saludPokemon2
+            Toast.makeText(requireContext(), "¡El rival no ha podido esquivar tu ataque!", Toast.LENGTH_SHORT).show()
+            turnoJugador = false
+            ataqueJugador = true
+            if (saludPokemon2 == 0) {
+                val animacionDesplazamiento = TranslateAnimation(0.0f, 1000.0f, 0.0f, 0.0f)
+                animacionDesplazamiento.duration = 500
+                binding.pokemon2.startAnimation(animacionDesplazamiento)
+                mostrarDialogoFinCombate("¡Has ganado!")
+            }
+        }
+    }
+
+    private fun defenderJugador() {
+        if (Random.nextBoolean()) {
+            animacionesAtaqueIA()
+            val dañoRecibido = 20
+            saludPokemon1 -= dañoRecibido
+            binding.textView4.text = "$saludPokemon1 HP"
+            binding.progressBar4.progress = saludPokemon1
+            Toast.makeText(requireContext(), "¡No has podido esquivar el ataque del rival!", Toast.LENGTH_SHORT).show()
+            if (saludPokemon1 == 0) {
+                mostrarDialogoFinCombate("Has perdido :(")
+            }
+        } else {
+            animacionAtaqueBloqueadoIA()
+            Toast.makeText(requireContext(), "¡Has esquivado el ataque del rival!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun atacarIA() {
+        if (saludPokemon1 > 0) {
+            if (saludPokemon1 == 0) {
+                val animacionDesplazamiento = TranslateAnimation(0.0f, -1000.0f, 0.0f, 0.0f)
+                animacionDesplazamiento.duration = 500
+                binding.pokemon1.startAnimation(animacionDesplazamiento)
+
+                mostrarDialogoFinCombate("¡Has perdido! :(")
+            }
+        }
+    }
+
+    private fun defenderIA() {
+        if (Random.nextBoolean()) {
+            animacionesAtaqueJugador()
+            val dañoRecibido = 20
+            saludPokemon2 -= dañoRecibido
+            binding.textView3.text = "$saludPokemon2 HP"
+            binding.progressBar3.progress = saludPokemon2
+            Toast.makeText(requireContext(), "¡El rival no ha podido esquivar tu ataque!", Toast.LENGTH_SHORT).show()
+            ataqueJugador = false
+            if (saludPokemon2 == 0) {
+                mostrarDialogoFinCombate("¡Has ganado!")
+            }
+        } else {
+            animacionAtaqueBloqueadoJugador()
+            Toast.makeText(requireContext(), "¡El rival esquivó tu ataque!", Toast.LENGTH_SHORT).show()
+            ataqueJugador = false
+        }
+    }
+
+    private fun mostrarDialogoFinCombate(mensaje: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Fin del combate")
+        builder.setMessage(mensaje)
+        builder.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, _ ->
+            dialog.dismiss()
+        })
+        builder.setCancelable(false)
+        builder.show()
+    }
+
+    private fun animacionesAtaqueJugador() {
+        val animacionAtaqueJugador = TranslateAnimation(0.0f, 350.0f, 0.0f, -100.0f)
+        animacionAtaqueJugador.duration = 400
+        binding.pokemon1.startAnimation(animacionAtaqueJugador)
+        Handler().postDelayed({
+            val animacionDañoIA = TranslateAnimation(0.0f, -50.0f, 0.0f, 0.0f)
+            animacionDañoIA.duration = 200
+            animacionDañoIA.repeatMode = Animation.REVERSE
+            animacionDañoIA.repeatCount = 3
+            binding.pokemon2.startAnimation(animacionDañoIA)
+        }, 400)
+    }
+
+    private fun animacionAtaqueBloqueadoJugador() {
+        val animacionAtaqueJugador = TranslateAnimation(0.0f, 350.0f, 0.0f, -100.0f)
+        animacionAtaqueJugador.duration = 400
+        binding.pokemon1.startAnimation(animacionAtaqueJugador)
+    }
+
+    private fun animacionesAtaqueIA() {
+        val animacionAtaqueIA = TranslateAnimation(0.0f, -350.0f, 0.0f, 100.0f)
+        animacionAtaqueIA.duration = 400
+        binding.pokemon2.startAnimation(animacionAtaqueIA)
+        Handler().postDelayed({
+            val animacion = TranslateAnimation(0.0f, -50.0f, 0.0f, 0.0f)
+            animacion.duration = 200
+            animacion.repeatMode = Animation.REVERSE
+            animacion.repeatCount = 3
+            binding.pokemon1.startAnimation(animacion)
+        }, 400)
+    }
+
+    private fun  animacionAtaqueBloqueadoIA() {
+        val animacionAtaqueIA = TranslateAnimation(0.0f, -350.0f, 0.0f, 100.0f)
+        animacionAtaqueIA.duration = 400
+        binding.pokemon2.startAnimation(animacionAtaqueIA)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
