@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pikatech.data.models.pokemon.Result
+import com.example.pikatech.data.models.pokemon.detallepoke.RespuestaPokemon
 import com.example.pikatech.databinding.VistaCeldaPokemonBinding
 import com.squareup.picasso.Picasso
 
@@ -43,7 +45,9 @@ class PokemonAdapter(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwne
         Picasso.get().load(urlImagen).into(holder.binding.pokemonFoto);
 
         holder.itemView.setOnClickListener {
+
             listener.onClick(dataItem)
+
         }
 
     }

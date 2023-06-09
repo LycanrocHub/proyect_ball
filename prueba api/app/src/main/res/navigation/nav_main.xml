@@ -18,7 +18,11 @@
     <fragment
         android:id="@+id/PrimerFragment"
         android:name="com.example.pikatech.ui.fragments.PrimerFragment"
-        android:label="Inventario" />
+        android:label="Inventario" >
+        <action
+            android:id="@+id/action_PrimerFragment_to_dexFragment"
+            app:destination="@id/dexFragment" />
+    </fragment>
     <fragment
         android:id="@+id/listadoBayas"
         android:name="com.example.pikatech.ui.ListadoBayas"
@@ -33,4 +37,9 @@
         android:name="com.example.pikatech.ui.fragments.CombatFragment"
         android:label="Campo de Batalla"
         tools:layout="@layout/fragment_combat" />
+    <fragment
+        android:id="@+id/dexFragment"
+        android:name="com.example.pikatech.ui.fragments.DexFragment"
+        android:label="Dex"
+        tools:layout="@layout/fragment_dex" />
 </navigation>

@@ -13,6 +13,7 @@ import com.example.pikatech.data.models.LocationsModels.locationData
 import com.example.pikatech.data.models.LocationsModels2.Locations
 import com.example.pikatech.data.models.bayas.ResultBayas
 import com.example.pikatech.data.models.bayas2.BayaRes
+import com.example.pikatech.data.models.pokemon.Result
 import com.example.pikatech.data.models.pokemon.detallemovimiento.RespuestaMovimiento
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +26,7 @@ class MyViewModel(val context: Context) : ViewModel() {
     val listado_items = MutableLiveData<items?>()
     val listado_pokemon = MutableLiveData<ListadoPokemon?>()
     val listado_localizaciones = MutableLiveData<Locations?>()
+    val pokemon_seleccionado = MutableLiveData<Result>()
 
     fun getItemsIndividual(url: String): MutableLiveData<itemsData?> {
         val itemIndividual = MutableLiveData<itemsData?>()
@@ -127,6 +129,12 @@ class MyViewModel(val context: Context) : ViewModel() {
             }
         }
         return datosMovimiento
+    }
+
+    fun elegirPokemon(pokemon: Result) {
+
+        pokemon_seleccionado.value = pokemon
+
     }
 
     class MyViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
