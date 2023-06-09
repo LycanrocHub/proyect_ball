@@ -31,6 +31,10 @@
     <fragment
         android:id="@+id/combatFragment"
         android:name="com.example.pikatech.ui.fragments.CombatFragment"
+<<<<<<< HEAD
         android:label="Campo de Batalla"
+=======
+        android:label="Combate"
+>>>>>>> listadoItemsV2
         tools:layout="@layout/fragment_combat" />
 </navigation>
