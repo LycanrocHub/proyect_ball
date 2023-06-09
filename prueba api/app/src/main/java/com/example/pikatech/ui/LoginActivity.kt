@@ -28,8 +28,6 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-<<<<<<< HEAD
-=======
         setSupportActionBar(binding.toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -42,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
 
->>>>>>> listadoItemsV2
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
