@@ -58,7 +58,7 @@ class CombatFragment : Fragment() {
         binding.button7.text = pokemonInfo1.moves?.get(3)?.move?.name
         binding.button8.text = pokemonInfo1.moves?.get(4)?.move?.name
 
-        val movimiento1 = movimientosPokemon.versionGroupDetails?.get(1).mo
+        //val movimiento1 = movimientosPokemon.versionGroupDetails?.get(1).mo
 
         val urlImagenPokemon2 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokemonId2}.png"
         Picasso.get().load(urlImagenPokemon2).into(binding.pokemon2)

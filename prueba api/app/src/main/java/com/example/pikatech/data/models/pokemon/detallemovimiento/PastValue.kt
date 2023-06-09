@@ -7,5 +7,5 @@ data class PastValue(
     val power: Any,
     val pp: Any,
     val type: Any,
-    val version_group: VersionGroupXX
+    //val version_group: VersionGroupXX
 )
