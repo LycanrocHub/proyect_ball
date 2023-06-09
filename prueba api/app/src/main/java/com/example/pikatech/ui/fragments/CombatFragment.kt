@@ -26,6 +26,7 @@ class CombatFragment : Fragment() {
     private var turnoJugador = true
     private var ataqueJugador = false
     private var defensaJugador = false
+    private var ataqueIA = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,8 +71,6 @@ class CombatFragment : Fragment() {
         binding.button6.setOnClickListener {
             if (turnoJugador && saludPokemon1 > 0) {
                 defenderJugador()
-                turnoJugador = false
-                defensaJugador = true
                 ejecutarTurnoIA()
             }
         }
@@ -92,13 +91,12 @@ class CombatFragment : Fragment() {
     }
 
     private fun atacarJugador() {
-        if (saludPokemon2 > 0) {
+        if (saludPokemon2 > 0 || saludPokemon1 > 0) {
             animacionesAtaqueJugador()
             val dañoRecibido = 20
             saludPokemon2 -= dañoRecibido
             binding.textView3.text = "$saludPokemon2 HP"
             binding.progressBar3.progress = saludPokemon2
-            Toast.makeText(requireContext(), "¡El rival no ha podido esquivar tu ataque!", Toast.LENGTH_SHORT).show()
             turnoJugador = false
             ataqueJugador = true
             if (saludPokemon2 == 0) {
@@ -111,28 +109,34 @@ class CombatFragment : Fragment() {
     }
 
     private fun defenderJugador() {
-        if (Random.nextBoolean()) {
-            animacionesAtaqueIA()
-            val dañoRecibido = 20
-            saludPokemon1 -= dañoRecibido
-            binding.textView4.text = "$saludPokemon1 HP"
-            binding.progressBar4.progress = saludPokemon1
-            Toast.makeText(requireContext(), "¡No has podido esquivar el ataque del rival!", Toast.LENGTH_SHORT).show()
-            if (saludPokemon1 == 0) {
-                mostrarDialogoFinCombate("Has perdido :(")
+        if (ataqueIA) {
+            if (Random.nextBoolean()) {
+                animacionesAtaqueIA()
+                val dañoRecibido = 20
+                saludPokemon1 -= dañoRecibido
+                binding.textView4.text = "$saludPokemon1 HP"
+                binding.progressBar4.progress = saludPokemon1
+                Toast.makeText(requireContext(), "¡No has podido esquivar el ataque del rival!", Toast.LENGTH_SHORT).show()
+                ataqueIA = false
+                if (saludPokemon1 == 0) {
+                    mostrarDialogoFinCombate("Has perdido :(")
+                }
+            } else {
+                animacionAtaqueBloqueadoIA()
+                Toast.makeText(requireContext(), "¡Has esquivado el ataque del rival!", Toast.LENGTH_SHORT).show()
+                ataqueIA = false
             }
-        } else {
-            animacionAtaqueBloqueadoIA()
-            Toast.makeText(requireContext(), "¡Has esquivado el ataque del rival!", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun atacarIA() {
-        if (saludPokemon1 > 0) {
+        if (saludPokemon1 > 0 || saludPokemon2 > 0) {
+            animacionesAtaqueIA()
+            ataqueIA = true
             if (saludPokemon1 == 0) {
                 val animacionDesplazamiento = TranslateAnimation(0.0f, -1000.0f, 0.0f, 0.0f)
                 animacionDesplazamiento.duration = 500
-                binding.pokemon1.startAnimation(animacionDesplazamiento)
+                binding.pokemon2.startAnimation(animacionDesplazamiento)
 
                 mostrarDialogoFinCombate("¡Has perdido! :(")
             }
@@ -140,21 +144,23 @@ class CombatFragment : Fragment() {
     }
 
     private fun defenderIA() {
-        if (Random.nextBoolean()) {
-            animacionesAtaqueJugador()
-            val dañoRecibido = 20
-            saludPokemon2 -= dañoRecibido
-            binding.textView3.text = "$saludPokemon2 HP"
-            binding.progressBar3.progress = saludPokemon2
-            Toast.makeText(requireContext(), "¡El rival no ha podido esquivar tu ataque!", Toast.LENGTH_SHORT).show()
-            ataqueJugador = false
-            if (saludPokemon2 == 0) {
-                mostrarDialogoFinCombate("¡Has ganado!")
+        if (ataqueJugador) {
+            if (Random.nextBoolean()) {
+                animacionesAtaqueJugador()
+                val dañoRecibido = 20
+                saludPokemon2 -= dañoRecibido
+                binding.textView3.text = "$saludPokemon2 HP"
+                binding.progressBar3.progress = saludPokemon2
+                Toast.makeText(requireContext(), "¡El rival no ha podido esquivar tu ataque!", Toast.LENGTH_SHORT).show()
+                ataqueJugador = false
+                if (saludPokemon2 == 0) {
+                    mostrarDialogoFinCombate("¡Has ganado!")
+                }
+            } else {
+                animacionAtaqueBloqueadoJugador()
+                Toast.makeText(requireContext(), "¡El rival esquivó tu ataque!", Toast.LENGTH_SHORT).show()
+                ataqueJugador = false
             }
-        } else {
-            animacionAtaqueBloqueadoJugador()
-            Toast.makeText(requireContext(), "¡El rival esquivó tu ataque!", Toast.LENGTH_SHORT).show()
-            ataqueJugador = false
         }
     }
 
