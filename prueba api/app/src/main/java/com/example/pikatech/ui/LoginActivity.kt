@@ -23,11 +23,23 @@ class LoginActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
 
-        // Comentario de prueba!!
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.toolbar.setTitleTextColor(Color.WHITE)
+
+
+        val navController = findNavController(R.id.containerview)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+
 
     }
 
