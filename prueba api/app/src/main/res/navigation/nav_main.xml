@@ -31,6 +31,6 @@
     <fragment
         android:id="@+id/combatFragment"
         android:name="com.example.pikatech.ui.fragments.CombatFragment"
-        android:label="fragment_combat"
+        android:label="Combate"
         tools:layout="@layout/fragment_combat" />
 </navigation>

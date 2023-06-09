@@ -23,7 +23,6 @@ class LoginActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
 
-        // Comentario de prueba!!
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
@@ -39,8 +38,6 @@ class LoginActivity : AppCompatActivity() {
         val navController = findNavController(R.id.containerview)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-
 
 
     }

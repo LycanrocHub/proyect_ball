@@ -6,4 +6,19 @@
     </style>
 
     <style name="Theme.PikaTech" parent="Base.Theme.PikaTech" />
+
+    <style name="CustomViewAllTab" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/pokefont</item>
+    </style>
+
+    <style name="CustomViewAllItem"  parent="android:Widget.TextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/pokefont</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/pokefont</item>
+    </style>
 </resources>

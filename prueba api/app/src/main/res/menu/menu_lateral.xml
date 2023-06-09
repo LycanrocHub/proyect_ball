@@ -3,9 +3,10 @@
 
     <item
         android:id="@+id/combatFragment"
-        android:icon="@drawable/fight_button"
+        android:icon="@drawable/ballp"
         android:title="Combate" />
     <item
         android:id="@+id/PrimerFragment"
+        android:icon="@drawable/icon"
         android:title="Información" />
 </menu>
