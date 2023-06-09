@@ -29,23 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.toolbar.setTitleTextColor(Color.WHITE)
-
-
-        val navController = findNavController(R.id.containerview)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-
-
-
     }
-
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.containerview)

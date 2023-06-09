@@ -22,7 +22,7 @@
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="100dp"
         android:src="@drawable/fix_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -13,6 +13,7 @@ import com.example.pikatech.data.models.LocationsModels.locationData
 import com.example.pikatech.data.models.LocationsModels2.Locations
 import com.example.pikatech.data.models.bayas.ResultBayas
 import com.example.pikatech.data.models.bayas2.BayaRes
+import com.example.pikatech.data.models.pokemon.detallemovimiento.RespuestaMovimiento
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -95,25 +96,16 @@ class MyViewModel(val context: Context) : ViewModel() {
     }
 
     fun getPokemon(){
-
         CoroutineScope(Dispatchers.IO).launch {
-
             val response = repositorio.getPokemon(0, 1010)
-
             if(response.isSuccessful){
-
                 val respuesta_pokemon = response.body()
-
                 listado_pokemon.postValue(respuesta_pokemon)
-
             }
-
         }
-
     }
 
     fun getPokemonIndividual(url: String): MutableLiveData<RespuestaPokemon?>{
-
         val pokemonIndividual = MutableLiveData<RespuestaPokemon?>()
         CoroutineScope(Dispatchers.IO).launch {
             val response = repositorio.getPokemonIndividual(url)
@@ -125,6 +117,17 @@ class MyViewModel(val context: Context) : ViewModel() {
         return pokemonIndividual
     }
 
+    fun getDatosMovimiento(url: String) : MutableLiveData<RespuestaMovimiento?> {
+        val datosMovimiento = MutableLiveData<RespuestaMovimiento?>()
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repositorio.getDatosMovimiento(url)
+            if(response.isSuccessful){
+                val respuesta_movimiento_ind = response.body()
+                datosMovimiento.postValue(respuesta_movimiento_ind)
+            }
+        }
+        return datosMovimiento
+    }
 
     class MyViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
