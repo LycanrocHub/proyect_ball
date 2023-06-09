@@ -11,8 +11,14 @@ import com.example.pikatech.data.models.pokemon.Result
 import com.example.pikatech.databinding.VistaCeldaPokemonBinding
 import com.squareup.picasso.Picasso
 
-class PokemonAdapter(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwner) : RecyclerView.Adapter<PokemonAdapter.CeldaPokemon>(),
+class PokemonAdapter(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwner, val listener: OnPokemonClickListener) : RecyclerView.Adapter<PokemonAdapter.CeldaPokemon>(),
     Filterable {
+
+    interface OnPokemonClickListener {
+
+        fun onClick(pokemon: Result)
+
+    }
 
     private var listado_de_pokemon = ArrayList<Result>()
     private var listado_de_pokemon_copia = ArrayList<Result>()
@@ -35,6 +41,10 @@ class PokemonAdapter(val myViewModel : MyViewModel, val lifeCycle: LifecycleOwne
         val urlImagen = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dataItem.id}.png"
 
         Picasso.get().load(urlImagen).into(holder.binding.pokemonFoto);
+
+        holder.itemView.setOnClickListener {
+            listener.onClick(dataItem)
+        }
 
     }
 

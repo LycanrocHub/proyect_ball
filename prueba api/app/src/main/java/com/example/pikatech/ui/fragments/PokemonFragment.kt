@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pikatech.R
+import com.example.pikatech.data.models.pokemon.Result
 import com.example.pikatech.databinding.FragmentPokemonBinding
 import com.example.pikatech.ui.MyViewModel
 import com.example.pikatech.ui.PokemonAdapter
@@ -35,7 +38,17 @@ class PokemonFragment : Fragment() {
 
         binding.recyclerview.layoutManager = GridLayoutManager(requireContext(),3, RecyclerView.VERTICAL, false)
 
-        val pokeAdapter = PokemonAdapter(myViewModel, viewLifecycleOwner)
+        val pokeAdapter = PokemonAdapter(myViewModel, viewLifecycleOwner, object : PokemonAdapter.OnPokemonClickListener{
+            override fun onClick(pokemon: Result) {
+                myViewModel.getPokemon()
+
+
+
+            }
+
+
+        })
+
         binding.recyclerview.adapter = pokeAdapter
 
         binding.searchview.setOnQueryTextListener(object :
